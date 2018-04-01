@@ -5,10 +5,8 @@ function main {
   source "$shome/script/profile"
 
   cd "$shome"
-
-  block compile pipenv
-  mkdir -p "$shome/bin"
-  ln -nfs "$(pipenv run which cli4)" "$shome/bin/"
+  
+  block compile pipenv update
 }
 
 main "$@"
