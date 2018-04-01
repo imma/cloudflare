@@ -9,6 +9,16 @@ function main {
   block compile pipenv
   mkdir -p "$shome/bin"
   ln -nfs "$(pipenv run which cli4)" "$shome/bin/"
+
+  case "${DISTRIB_ID}" in
+    Darwin)
+      curl -s https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-darwin-amd64.tgz
+      ;;
+    *)
+      curl -s https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.tgz
+      ;;
+  esac | tar xzC "$shome/bin"
+
 }
 
 main "$@"
