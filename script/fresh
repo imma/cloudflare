@@ -4,11 +4,11 @@ function main {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
-  if [[ "$($shome/script/version | jq -r '.cloudflare')" != "$CLOUDFLARE_VERSION" ]]; then
+  if [[ "$($shome/script/version | jq -r '.cli4')" != "$CLI4_VERSION" ]]; then
     return 1
   fi
 
-  if ! type -P cloudflared >/dev/null; then
+  if [[ "$($shome/script/version | jq -r '.cloudflared')" != "$CLOUDFLARED_VERSION" ]]; then
     return 1
   fi
 

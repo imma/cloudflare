@@ -4,8 +4,9 @@ function version {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
-  local ver_cloudflare="$(cli4 --version 2>/dev/null | awk '{print $NF}' || true)"
-  jq -n --arg cloudflare "$ver_cloudflare" '{cloudflare: $cloudflare}'
+  local ver_cli4="$(cli4 --version 2>&1 | awk '{print $NF}' || true)"
+  local ver_cloudflared="$(cloudflared --version 2>/dev/null | awk '{print $3}' || true)"
+  jq -n --arg cli4 "$ver_cli4" --arg cloudflared "$ver_cloudflared" '{cli4: $cli4, cloudflared: $cloudflared}'
 }
 
 version "$@"
